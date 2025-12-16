@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FDB913">
+    <meta name="description" content="MALA - Défie tes amis chaque jour avec des quiz et défis !">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MALA">
+    
+    <title>⭐ MALA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Écran d'accueil -->
+    <div id="homeScreen" class="screen active">
+        <div class="container">
+            <div class="header">
+                <div class="logo">⭐</div>
+                <h1 class="title">MALA</h1>
+                <p class="subtitle">Défie tes amis chaque jour !</p>
+            </div>
+
+            <!-- Carte groupe actuel -->
+            <div id="currentGroupCard" class="current-group-card hidden">
+                <p id="currentGroupText" class="current-group-text"></p>
+                <button onclick="goToGroup()" class="btn btn-secondary">Voir mon groupe →</button>
+            </div>
+
+            <!-- Toggle Créer/Rejoindre -->
+            <div class="toggle-container">
+                <button id="createToggle" class="toggle-btn active" onclick="toggleMode('create')">
+                    Créer un groupe
+                </button>
+                <button id="joinToggle" class="toggle-btn" onclick="toggleMode('join')">
+                    Rejoindre
+                </button>
+            </div>
+
+            <!-- Formulaire Créer -->
+            <div id="createForm" class="form-section">
+                <input type="text" id="createPlayerName" placeholder="Ton prénom" maxlength="15" class="input">
+                <input type="text" id="createGroupName" placeholder="Nom du groupe" maxlength="20" class="input">
+                <button onclick="createGroup()" class="btn btn-primary">Créer le groupe 🎉</button>
+            </div>
+
+            <!-- Formulaire Rejoindre -->
+            <div id="joinForm" class="form-section hidden">
+                <input type="text" id="joinPlayerName" placeholder="Ton prénom" maxlength="15" class="input">
+                <input type="text" id="joinGroupCode" placeholder="Code du groupe (6 chiffres)" maxlength="6" pattern="[0-9]*" inputmode="numeric" class="input">
+                <button onclick="joinGroup()" class="btn btn-primary">Rejoindre 👋</button>
+            </div>
+
+            <!-- Info -->
+            <div class="info-box">
+                <p id="infoText">💡 Tu recevras un code à partager avec tes amis</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Écran Groupe -->
+    <div id="groupScreen" class="screen">
+        <div class="container">
+            <div class="group-header">
+                <h2 id="groupName" class="group-name"></h2>
+                <div class="code-container">
+                    <span class="code-label">Code :</span>
+                    <span id="groupCode" class="code-text"></span>
+                </div>
+                <p id="memberCount" class="member-count"></p>
+            </div>
+
+            <!-- Boutons d'action -->
+            <div class="button-grid">
+                <button onclick="goToChallenge()" class="action-btn challenge-btn">
+                    <span class="action-emoji">📝</span>
+                    <span>Défi du Jour</span>
+                </button>
+                <button onclick="goToExpress()" class="action-btn express-btn">
+                    <span class="action-emoji">⚡</span>
+                    <span>Défi Express</span>
+                </button>
+            </div>
+
+            <!-- Classement -->
+            <div class="leaderboard">
+                <h3 class="section-title">🏆 Classement de la semaine</h3>
+                <div id="leaderboardList"></div>
+            </div>
+
+            <!-- Info -->
+            <div class="info-section">
+                <h4>ℹ️ Comment ça marche ?</h4>
+                <p>
+                    • Un défi par jour pour tout le groupe<br>
+                    • Points bonus pour la rapidité<br>
+                    • Défis express aléatoires (moins de 10 min)<br>
+                    • Classement remis à zéro chaque lundi
+                </p>
+            </div>
+
+            <!-- Boutons navigation -->
+            <button onclick="leaveGroup()" class="btn btn-danger">Quitter le groupe</button>
+            <button onclick="goToHome()" class="btn btn-secondary">← Retour</button>
+        </div>
+    </div>
+
+    <!-- Écran Challenge (Quiz) -->
+    <div id="challengeScreen" class="screen">
+        <div class="container">
+            <!-- Timer -->
+            <div class="timer-container">
+                <p class="timer-label">Temps restant</p>
+                <p id="challengeTimer" class="timer-text">30</p>
+            </div>
+
+            <!-- Question -->
+            <div class="question-card">
+                <p class="question-type">📝 QUIZ</p>
+                <p id="challengeQuestion" class="question-text"></p>
+            </div>
+
+            <!-- Options -->
+            <div id="challengeOptions" class="options-container"></div>
+
+            <!-- Info bonus -->
+            <div id="bonusInfo" class="bonus-info">
+                <p>⚡ Plus tu es rapide, plus tu gagnes de points !</p>
+                <p id="maxPoints" class="bonus-details"></p>
+            </div>
+
+            <!-- Bouton retour -->
+            <button onclick="goToGroup()" class="btn btn-secondary">Retour au groupe</button>
+        </div>
+    </div>
+
+    <!-- Écran Express -->
+    <div id="expressScreen" class="screen express-screen">
+        <div class="container">
+            <!-- Badge Express -->
+            <div class="express-badge">
+                <div class="express-icon">⚡</div>
+                <div class="express-text">DÉFI EXPRESS</div>
+                <div class="express-subtext">Réponds vite !</div>
+            </div>
+
+            <!-- Timer -->
+            <div class="express-timer-container">
+                <div id="expressTimer" class="express-timer">15</div>
+                <p class="express-timer-label">secondes</p>
+            </div>
+
+            <!-- Challenge Card -->
+            <div class="express-challenge-card">
+                <h3 id="expressTitle" class="express-title"></h3>
+                <p id="expressQuestion" class="express-question"></p>
+            </div>
+
+            <!-- Options -->
+            <div id="expressOptions" class="options-container"></div>
+
+            <!-- Points info -->
+            <div class="express-points-info">
+                <p id="expressPoints">🎯 50 points si tu réponds correctement !</p>
+            </div>
+
+            <!-- Bouton abandonner -->
+            <button onclick="abandonExpress()" class="btn btn-danger">Abandonner</button>
+        </div>
+    </div>
+
+    <!-- Modal (pour les alertes) -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="modalTitle" class="modal-title"></h3>
+            <p id="modalMessage" class="modal-message"></p>
+            <div class="modal-buttons">
+                <button id="modalBtn1" class="btn btn-primary" onclick="closeModal()">OK</button>
+                <button id="modalBtn2" class="btn btn-secondary hidden" onclick="closeModal()">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

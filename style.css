@@ -1,0 +1,615 @@
+/* Variables MALA */
+:root {
+    --yellow: #FDB913;
+    --purple: #5B2E91;
+    --black: #1A1A1A;
+    --white: #FFFFFF;
+    --light-gray: #F5F5F5;
+    --red: #FF3B30;
+    --green: #4CD964;
+}
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* Écrans */
+.screen {
+    display: none;
+    min-height: 100vh;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin: 40px 0 30px;
+}
+
+.logo {
+    font-size: 80px;
+    margin-bottom: 10px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.title {
+    font-size: 48px;
+    font-weight: bold;
+    color: var(--purple);
+    text-shadow: 2px 2px 0 var(--yellow);
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: var(--black);
+}
+
+/* Cards */
+.current-group-card {
+    background: var(--light-gray);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 2px solid var(--purple);
+}
+
+.current-group-text {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Toggle */
+.toggle-container {
+    display: flex;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid var(--purple);
+    margin-bottom: 20px;
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 15px;
+    background: var(--white);
+    color: var(--purple);
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.toggle-btn.active {
+    background: var(--purple);
+    color: var(--white);
+}
+
+/* Inputs */
+.input {
+    width: 100%;
+    padding: 15px;
+    background: var(--light-gray);
+    border: 2px solid var(--yellow);
+    border-radius: 12px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s;
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--purple);
+}
+
+/* Buttons */
+.btn {
+    width: 100%;
+    padding: 18px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 10px;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-primary {
+    background: var(--yellow);
+    color: var(--purple);
+    border: 3px solid var(--purple);
+}
+
+.btn-secondary {
+    background: var(--purple);
+    color: var(--white);
+    border: 3px solid var(--yellow);
+}
+
+.btn-danger {
+    background: transparent;
+    color: var(--red);
+    border: 2px solid var(--red);
+}
+
+/* Info Box */
+.info-box {
+    background: var(--light-gray);
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.form-section {
+    margin-top: 20px;
+}
+
+/* Groupe Screen */
+.group-header {
+    background: var(--yellow);
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    margin-bottom: 20px;
+    border: 3px solid var(--purple);
+}
+
+.group-name {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--purple);
+    margin-bottom: 10px;
+}
+
+.code-container {
+    margin-top: 10px;
+}
+
+.code-label {
+    font-size: 14px;
+    color: var(--black);
+}
+
+.code-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--purple);
+    letter-spacing: 2px;
+    margin-left: 5px;
+}
+
+.member-count {
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+/* Boutons d'action */
+.button-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.action-btn {
+    padding: 20px;
+    border-radius: 16px;
+    border: 3px solid;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s;
+}
+
+.action-btn:active {
+    transform: scale(0.95);
+}
+
+.challenge-btn {
+    background: var(--purple);
+    border-color: var(--yellow);
+    color: var(--white);
+}
+
+.express-btn {
+    background: var(--yellow);
+    border-color: var(--purple);
+    color: var(--purple);
+}
+
+.action-emoji {
+    font-size: 40px;
+}
+
+/* Classement */
+.leaderboard {
+    margin-bottom: 25px;
+}
+
+.section-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--purple);
+    margin-bottom: 15px;
+}
+
+.member-card {
+    display: flex;
+    align-items: center;
+    background: var(--light-gray);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    border: 2px solid var(--light-gray);
+}
+
+.member-card.first {
+    background: #FFD700;
+    border-color: var(--purple);
+}
+
+.member-card.second {
+    background: #C0C0C0;
+    border-color: var(--purple);
+}
+
+.member-card.third {
+    background: #CD7F32;
+    border-color: var(--purple);
+}
+
+.member-rank {
+    width: 40px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.member-info {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.member-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.member-score {
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+/* Info Section */
+.info-section {
+    background: var(--light-gray);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.info-section h4 {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--purple);
+    margin-bottom: 10px;
+}
+
+.info-section p {
+    font-size: 14px;
+    line-height: 22px;
+}
+
+/* Challenge Screen */
+.timer-container {
+    text-align: center;
+    margin: 20px 0 30px;
+}
+
+.timer-label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.timer-text {
+    font-size: 48px;
+    font-weight: bold;
+    color: var(--purple);
+}
+
+.timer-text.warning {
+    color: var(--red);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.question-card {
+    background: var(--yellow);
+    padding: 25px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    border: 3px solid var(--purple);
+}
+
+.question-type {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--purple);
+    margin-bottom: 10px;
+}
+
+.question-text {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 30px;
+}
+
+/* Options */
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.option-btn {
+    padding: 18px;
+    background: var(--light-gray);
+    border: 2px solid var(--light-gray);
+    border-radius: 12px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.option-btn:hover {
+    border-color: var(--purple);
+}
+
+.option-btn.selected {
+    border-color: var(--purple);
+    background: var(--white);
+    font-weight: bold;
+}
+
+.option-btn.correct {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--white);
+    font-weight: bold;
+}
+
+.option-btn.wrong {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+    font-weight: bold;
+}
+
+.option-btn:disabled {
+    cursor: not-allowed;
+}
+
+/* Bonus Info */
+.bonus-info {
+    background: var(--light-gray);
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.bonus-details {
+    font-size: 12px;
+    color: var(--purple);
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* Express Screen */
+.express-screen {
+    background: var(--black);
+    color: var(--white);
+}
+
+.express-badge {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.express-icon {
+    font-size: 60px;
+}
+
+.express-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--yellow);
+    letter-spacing: 2px;
+    margin-top: 5px;
+}
+
+.express-subtext {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.express-timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    background: var(--purple);
+    border: 4px solid var(--yellow);
+    border-radius: 50%;
+    margin: 0 auto 30px;
+}
+
+.express-timer {
+    font-size: 48px;
+    font-weight: bold;
+    color: var(--white);
+}
+
+.express-timer.critical {
+    color: var(--red);
+    animation: pulse 1s infinite;
+}
+
+.express-timer-label {
+    font-size: 12px;
+    margin-top: -5px;
+}
+
+.express-challenge-card {
+    background: var(--yellow);
+    color: var(--black);
+    padding: 25px;
+    border-radius: 16px;
+    margin-bottom: 25px;
+    border: 3px solid var(--purple);
+}
+
+.express-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--purple);
+    margin-bottom: 10px;
+}
+
+.express-question {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 28px;
+}
+
+.express-points-info {
+    background: var(--purple);
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.express-points-info p {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s;
+}
+
+.modal-content {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 16px;
+    max-width: 400px;
+    margin: 20px;
+    text-align: center;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--purple);
+    margin-bottom: 15px;
+}
+
+.modal-message {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 20px;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.modal-buttons .btn {
+    flex: 1;
+}
+
+/* Utility */
+.hidden {
+    display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .title {
+        font-size: 40px;
+    }
+    
+    .logo {
+        font-size: 60px;
+    }
+    
+    .button-grid {
+        grid-template-columns: 1fr;
+    }
+}
