@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#FDB913">
-    <meta name="description" content="MALA - Défie tes amis chaque jour avec des quiz et défis !">
+    <meta name="theme-color" content="#2A2A2A">
+    <meta name="description" content="MALA - Défie tes amis chaque jour !">
     
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
@@ -17,172 +17,137 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Écran d'accueil -->
-    <div id="homeScreen" class="screen active">
+    <!-- ÉCRAN 1 : Pseudo -->
+    <div id="pseudoScreen" class="screen active">
         <div class="container">
-            <div class="header">
-                <div class="logo">⭐</div>
-                <h1 class="title">MALA</h1>
-                <p class="subtitle">Défie tes amis chaque jour !</p>
-            </div>
-
-            <!-- Carte groupe actuel -->
-            <div id="currentGroupCard" class="current-group-card hidden">
-                <p id="currentGroupText" class="current-group-text"></p>
-                <button onclick="goToGroup()" class="btn btn-secondary">Voir mon groupe →</button>
-            </div>
-
-            <!-- Toggle Créer/Rejoindre -->
-            <div class="toggle-container">
-                <button id="createToggle" class="toggle-btn active" onclick="toggleMode('create')">
-                    Créer un groupe
-                </button>
-                <button id="joinToggle" class="toggle-btn" onclick="toggleMode('join')">
-                    Rejoindre
-                </button>
-            </div>
-
-            <!-- Formulaire Créer -->
-            <div id="createForm" class="form-section">
-                <input type="text" id="createPlayerName" placeholder="Ton prénom" maxlength="15" class="input">
-                <input type="text" id="createGroupName" placeholder="Nom du groupe" maxlength="20" class="input">
-                <button onclick="createGroup()" class="btn btn-primary">Créer le groupe 🎉</button>
-            </div>
-
-            <!-- Formulaire Rejoindre -->
-            <div id="joinForm" class="form-section hidden">
-                <input type="text" id="joinPlayerName" placeholder="Ton prénom" maxlength="15" class="input">
-                <input type="text" id="joinGroupCode" placeholder="Code du groupe (6 chiffres)" maxlength="6" pattern="[0-9]*" inputmode="numeric" class="input">
-                <button onclick="joinGroup()" class="btn btn-primary">Rejoindre 👋</button>
-            </div>
-
-            <!-- Info -->
-            <div class="info-box">
-                <p id="infoText">💡 Tu recevras un code à partager avec tes amis</p>
-            </div>
+            <div class="logo-large">Mala</div>
+            
+            <img src="mascotte.png" alt="Mascotte MALA" class="mascotte-home">
+            
+            <label class="input-label">Votre pseudo</label>
+            <input type="text" id="pseudoInput" class="input-yellow" placeholder="Manon" maxlength="15">
+            
+            <button onclick="createGroupPage()" class="btn-purple">Créer un groupe</button>
+            <button onclick="joinGroupPage()" class="btn-purple">Rejoindre un groupe</button>
+            
+            <div class="footer">© 2025 MALA — Projet étudiant réalisé dans le cadre du projet de partiels</div>
         </div>
     </div>
 
-    <!-- Écran Groupe -->
-    <div id="groupScreen" class="screen">
+    <!-- ÉCRAN 2 : Créer un groupe -->
+    <div id="createScreen" class="screen">
         <div class="container">
-            <div class="group-header">
-                <h2 id="groupName" class="group-name"></h2>
-                <div class="code-container">
-                    <span class="code-label">Code :</span>
-                    <span id="groupCode" class="code-text"></span>
+            <div class="logo-large">Mala</div>
+            
+            <button onclick="backToPseudo()" class="btn-back">
+                <span class="arrow-left"></span>
+                Retour
+            </button>
+            
+            <div class="card-purple">
+                <h2 class="card-title">Nom du groupe</h2>
+                <input type="text" id="groupNameInput" class="input-transparent" placeholder="Partiels" maxlength="20">
+                
+                <h2 class="card-title">Difficulté</h2>
+                <select id="difficultySelect" class="input-transparent">
+                    <option value="easy">Facile</option>
+                    <option value="medium" selected>Moyen (Par défaut)</option>
+                    <option value="hard">Difficile</option>
+                </select>
+                
+                <div id="groupCodeDisplay" class="code-display hidden">
+                    <h2 class="card-title">Code</h2>
+                    <div class="code-number" id="generatedCode">12345</div>
                 </div>
-                <p id="memberCount" class="member-count"></p>
             </div>
-
-            <!-- Boutons d'action -->
-            <div class="button-grid">
-                <button onclick="goToChallenge()" class="action-btn challenge-btn">
-                    <span class="action-emoji">📝</span>
-                    <span>Défi du Jour</span>
-                </button>
-                <button onclick="goToExpress()" class="action-btn express-btn">
-                    <span class="action-emoji">⚡</span>
-                    <span>Défi Express</span>
-                </button>
-            </div>
-
-            <!-- Classement -->
-            <div class="leaderboard">
-                <h3 class="section-title">🏆 Classement de la semaine</h3>
-                <div id="leaderboardList"></div>
-            </div>
-
-            <!-- Info -->
-            <div class="info-section">
-                <h4>ℹ️ Comment ça marche ?</h4>
-                <p>
-                    • Un défi par jour pour tout le groupe<br>
-                    • Points bonus pour la rapidité<br>
-                    • Défis express aléatoires (moins de 10 min)<br>
-                    • Classement remis à zéro chaque lundi
-                </p>
-            </div>
-
-            <!-- Boutons navigation -->
-            <button onclick="leaveGroup()" class="btn btn-danger">Quitter le groupe</button>
-            <button onclick="goToHome()" class="btn btn-secondary">← Retour</button>
+            
+            <img src="mascotte.png" alt="Mascotte" class="mascotte-small">
+            
+            <button onclick="generateGroup()" class="btn-create" id="createBtn">Créer</button>
+            <button onclick="goToFeed()" class="btn-create hidden" id="continueBtn">Continuer</button>
+            
+            <div class="footer">© 2025 MALA — Projet étudiant réalisé dans le cadre du projet de partiels</div>
         </div>
     </div>
 
-    <!-- Écran Challenge (Quiz) -->
-    <div id="challengeScreen" class="screen">
+    <!-- ÉCRAN 3 : Rejoindre un groupe -->
+    <div id="joinScreen" class="screen">
         <div class="container">
-            <!-- Timer -->
-            <div class="timer-container">
-                <p class="timer-label">Temps restant</p>
-                <p id="challengeTimer" class="timer-text">30</p>
+            <div class="logo-large">Mala</div>
+            
+            <button onclick="backToPseudo()" class="btn-back">
+                <span class="arrow-left"></span>
+                Retour
+            </button>
+            
+            <div class="card-purple">
+                <h2 class="card-title-large">Code</h2>
+                <input type="text" id="joinCodeInput" class="input-code" placeholder="_____" maxlength="5" inputmode="numeric">
             </div>
-
-            <!-- Question -->
-            <div class="question-card">
-                <p class="question-type">📝 QUIZ</p>
-                <p id="challengeQuestion" class="question-text"></p>
-            </div>
-
-            <!-- Options -->
-            <div id="challengeOptions" class="options-container"></div>
-
-            <!-- Info bonus -->
-            <div id="bonusInfo" class="bonus-info">
-                <p>⚡ Plus tu es rapide, plus tu gagnes de points !</p>
-                <p id="maxPoints" class="bonus-details"></p>
-            </div>
-
-            <!-- Bouton retour -->
-            <button onclick="goToGroup()" class="btn btn-secondary">Retour au groupe</button>
+            
+            <img src="mascotte.png" alt="Mascotte" class="mascotte-small">
+            
+            <button onclick="joinGroupWithCode()" class="btn-join">Rejoindre</button>
+            
+            <div class="footer">© 2025 MALA — Projet étudiant réalisé dans le cadre du projet de partiels</div>
         </div>
     </div>
 
-    <!-- Écran Express -->
-    <div id="expressScreen" class="screen express-screen">
-        <div class="container">
-            <!-- Badge Express -->
-            <div class="express-badge">
-                <div class="express-icon">⚡</div>
-                <div class="express-text">DÉFI EXPRESS</div>
-                <div class="express-subtext">Réponds vite !</div>
+    <!-- ÉCRAN 4 : Feed du groupe -->
+    <div id="feedScreen" class="screen">
+        <!-- Header -->
+        <div class="feed-header">
+            <div class="header-left">
+                <div class="burger-icon"></div>
+                <div class="logo-small">Mala</div>
             </div>
-
-            <!-- Timer -->
-            <div class="express-timer-container">
-                <div id="expressTimer" class="express-timer">15</div>
-                <p class="express-timer-label">secondes</p>
+            <div class="header-center">
+                <span class="group-name-header" id="groupNameHeader">Partiels</span>
+                <div class="member-badge" id="memberBadge">4</div>
             </div>
-
-            <!-- Challenge Card -->
-            <div class="express-challenge-card">
-                <h3 id="expressTitle" class="express-title"></h3>
-                <p id="expressQuestion" class="express-question"></p>
+            <div class="header-right">
+                <div class="menu-icon"></div>
             </div>
+        </div>
 
-            <!-- Options -->
-            <div id="expressOptions" class="options-container"></div>
+        <!-- Feed d'activité -->
+        <div class="feed-content">
+            <div id="activityFeed"></div>
+            
+            <img src="mascotte.png" alt="Mascotte" class="mascotte-feed">
+        </div>
 
-            <!-- Points info -->
-            <div class="express-points-info">
-                <p id="expressPoints">🎯 50 points si tu réponds correctement !</p>
-            </div>
+        <!-- Input message -->
+        <div class="message-input">
+            <button class="attach-btn"></button>
+            <input type="text" placeholder="Votre message..." class="message-field">
+            <button class="send-btn"></button>
+        </div>
 
-            <!-- Bouton abandonner -->
-            <button onclick="abandonExpress()" class="btn btn-danger">Abandonner</button>
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <button class="nav-btn active">
+                <div class="nav-icon nav-home"></div>
+            </button>
+            <button class="nav-btn" onclick="showLeaderboard()">
+                <div class="nav-icon nav-trophy"></div>
+            </button>
+            <button class="nav-btn" onclick="showChallenges()">
+                <div class="nav-icon nav-star"></div>
+            </button>
+            <button class="nav-btn">
+                <div class="nav-icon nav-profile"></div>
+            </button>
+            <button class="nav-btn nav-plus"></button>
         </div>
     </div>
 
-    <!-- Modal (pour les alertes) -->
+    <!-- Modal -->
     <div id="modal" class="modal hidden">
         <div class="modal-content">
-            <h3 id="modalTitle" class="modal-title"></h3>
-            <p id="modalMessage" class="modal-message"></p>
-            <div class="modal-buttons">
-                <button id="modalBtn1" class="btn btn-primary" onclick="closeModal()">OK</button>
-                <button id="modalBtn2" class="btn btn-secondary hidden" onclick="closeModal()">Annuler</button>
-            </div>
+            <h3 id="modalTitle"></h3>
+            <p id="modalMessage"></p>
+            <button onclick="closeModal()" class="btn-modal">OK</button>
         </div>
     </div>
 
