@@ -1,0 +1,26 @@
+{
+  "name": "MALA - Défis Entre Amis",
+  "short_name": "MALA",
+  "description": "Défie tes amis chaque jour avec des quiz et défis express !",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FDB913",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["games", "social"],
+  "lang": "fr"
+}
