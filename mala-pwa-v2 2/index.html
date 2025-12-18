@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2A2A2A">
+    <meta name="description" content="MALA - Défie tes amis chaque jour !">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MALA">
+    
+    <title>⭐ MALA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ÉCRAN 1 : Pseudo -->
+    <div id="pseudoScreen" class="screen active">
+        <div class="container">
+            <div class="logo-large">Mala</div>
+            
+            <img src="images/Frame_17.png" alt="Mascotte MALA" class="mascotte-home">
+            
+            <label class="input-label">Votre pseudo</label>
+            <input type="text" id="pseudoInput" class="input-yellow" placeholder="Pseudo" maxlength="15">
+            
+            <button onclick="createGroupPage()" class="btn-purple">Créer un groupe</button>
+            <button onclick="joinGroupPage()" class="btn-purple">Rejoindre un groupe</button>
+            
+            <div class="footer">© 2025 MALA — Projet étudiant réalisé dans le cadre du projet de partiels</div>
+        </div>
+    </div>
+
+    <!-- ÉCRAN 2 : Créer un groupe -->
+    <div id="createScreen" class="screen">
+        <div class="container">
+            <div class="logo-large">Mala</div>
+            
+            <button onclick="backToPseudo()" class="btn-back">
+                <span class="arrow-left"></span>
+                Retour
+            </button>
+            
+            <div class="card-purple">
+                <h2 class="card-title">Nom du groupe</h2>
+                <input type="text" id="groupNameInput" class="input-transparent" placeholder="Partiels" maxlength="20">
+                
+                <h2 class="card-title">Difficulté</h2>
+                <select id="difficultySelect" class="input-transparent">
+                    <option value="easy">Facile</option>
+                    <option value="medium" selected>Moyen (Par défaut)</option>
+                    <option value="hard">Difficile</option>
+                </select>
+                
+                <div id="groupCodeDisplay" class="code-display hidden">
+                    <h2 class="card-title">Code</h2>
+                    <div class="code-number" id="generatedCode">12345</div>
+                </div>
+            </div>
+            
+            <img src="images/Frame_17.png" alt="Mascotte" class="mascotte-small">
+            
+            <button onclick="generateGroup()" class="btn-create" id="createBtn">Créer</button>
+            <button onclick="goToFeed()" class="btn-create hidden" id="continueBtn">Continuer</button>
+            
+            <div class="footer">© 2025 MALA — Projet étudiant réalisé dans le cadre du projet de partiels</div>
+        </div>
+    </div>
+
+    <!-- ÉCRAN 3 : Rejoindre un groupe -->
+    <div id="joinScreen" class="screen">
+        <div class="container">
+            <div class="logo-large">Mala</div>
+            
+            <button onclick="backToPseudo()" class="btn-back">
+                <span class="arrow-left"></span>
+                Retour
+            </button>
+            
+            <div class="card-purple">
+                <h2 class="card-title-large">Code</h2>
+                <input type="text" id="joinCodeInput" class="input-code" placeholder="_____" maxlength="5" inputmode="numeric">
+            </div>
+            
+            <img src="images/Frame_17.png" alt="Mascotte" class="mascotte-small">
+            
+            <button onclick="joinGroupWithCode()" class="btn-join">Rejoindre</button>
+            
+            <div class="footer">© 2025 MALA — Projet étudiant réalisé dans le cadre du projet de partiels</div>
+        </div>
+    </div>
+
+    <!-- ÉCRAN 4 : Feed du groupe -->
+    <div id="feedScreen" class="screen">
+        <!-- Header -->
+        <div class="feed-header">
+            <div class="header-left">
+                <img src="icons/prenium.svg" alt="Menu" class="icon-svg">
+                <div class="logo-small">MALA</div>
+            </div>
+            <div class="header-center">
+                <span class="group-name-header" id="groupNameHeader">Partiels</span>
+                <div class="member-badge" id="memberBadge">4</div>
+            </div>
+            <div class="header-right">
+                <img src="icons/Parametre.svg" alt="Paramètres" class="icon-svg" onclick="showSettings()">
+            </div>
+        </div>
+
+        <!-- Feed d'activité -->
+        <div class="feed-content">
+            <div id="activityFeed"></div>
+        </div>
+
+        <!-- Input message -->
+        <div class="message-input">
+            <img src="icons/addj.svg" alt="Joindre" class="icon-msg">
+            <input type="text" placeholder="Votre message..." class="message-field">
+            <img src="icons/vocaux.svg" alt="Envoyer" class="icon-msg">
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <button class="nav-btn active" onclick="showFeed()">
+                <img src="icons/homev.svg" alt="Accueil" class="nav-icon-svg">
+            </button>
+            <button class="nav-btn" onclick="showLeaderboard()">
+                <img src="icons/coupeblack.svg" alt="Classement" class="nav-icon-svg">
+            </button>
+            <button class="nav-btn" onclick="showGames()">
+                <img src="icons/jeuxb.svg" alt="Jeux" class="nav-icon-svg nav-center">
+            </button>
+            <button class="nav-btn" onclick="showProfile()">
+                <img src="icons/Groupe.svg" alt="Profil" class="nav-icon-svg">
+            </button>
+            <button class="nav-btn" onclick="showSoiree()">
+                <img src="icons/fêteb.svg" alt="Mode Soirée" class="nav-icon-svg">
+            </button>
+        </div>
+    </div>
+
+    <!-- ÉCRAN 5 : Classement -->
+    <div id="leaderboardScreen" class="screen">
+        <div class="feed-header">
+            <div class="header-left">
+                <img src="icons/prenium.svg" alt="Menu" class="icon-svg">
+            </div>
+            <div class="header-center">
+                <div class="logo-small">MALA</div>
+            </div>
+            <div class="header-right">
+                <img src="icons/Parametre.svg" alt="Paramètres" class="icon-svg" onclick="showSettings()">
+            </div>
+        </div>
+
+        <div class="page-content">
+            <h1 class="page-title">Tableau des scores</h1>
+            
+            <div id="leaderboardList" class="leaderboard-container"></div>
+            
+            <img src="images/Frame_17.png" alt="Mascotte" class="mascotte-bottom">
+            <div class="celebration">🎉</div>
+        </div>
+
+        <div class="bottom-nav">
+            <button class="nav-btn" onclick="showFeed()">
+                <img src="icons/home.svg" alt="Accueil" class="nav-icon-svg">
+            </button>
+            <button class="nav-btn active" onclick="showLeaderboard()">
+                <img src="icons/coupeviolet.svg" alt="Classement" class="nav-icon-svg">
+            </button>
+            <button class="nav-btn" onclick="showGames()">
+                <img src="icons/jeuxb.svg" alt="Jeux" class="nav-icon-svg nav-center">
+            </button>
+            <button class="nav-btn" onclick="showProfile()">
+                <img src="icons/Groupe.svg" alt="Profil" class="nav-icon-svg">
+            </button>
+            <button class="nav-btn" onclick="showSoiree()">
+                <img src="icons/fêteb.svg" alt="Mode Soirée" class="nav-icon-svg">
+            </button>
+        </div>
+    </div>
+
+    <!-- ÉCRAN 6 : Jeux -->
+    <div id="gamesScreen" class="screen">
+        <div class="feed-header">
+            <div class="header-left">
+                <img src="icons/prenium.svg" alt="Menu" class="icon-svg">
+            </div>
+            <div class="header-center">
+                <div class="logo-small">MALA</div>
+            </div>
+            <div class="header-right">
+                <img src="icons/Parametre.svg" alt="Paramètres" class="icon-svg" onclick="showSettings()">
+            </div>
+        </div>
+
+        <div class="page-content">
+            <h1 class="page-title">Jeux</h1>
+            
+            <div class="games-grid">
+                <img src="images/loupgarou_1.png" alt="Le Loup Garou" class="game-banner">
+                <img src="images/mala_ludo_1.png" alt="Mala Ludo" class="game-banner">
+                <img src="images/draw_mala_1.png" alt="Mala Draw" class="game-banner">
+                <img src="images/Uno_1.png" alt="MalaCards" class="game-banner">
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <button class="nav-btn" onclick="showFeed()">
+                <img src="icons/home.svg" alt="Accueil" class="nav-icon-svg">
+            </button>
+            <button class="nav-btn" onclick="showLeaderboard()">
+                <img src="icons/coupeblack.svg" alt="Classement" class="nav-icon-svg">
+            </button>
+            <button class="nav-btn active" onclick="showGames()">
+                <img src="icons/jeuxv.svg" alt="Jeux" class="nav-icon-svg nav-center">
+            </button>
+            <button class="nav-btn" onclick="showProfile()">
+                <img src="icons/Groupe.svg" alt="Profil" class="nav-icon-svg">
+            </button>
+            <button class="nav-btn" onclick="showSoiree()">
+                <img src="icons/fêteb.svg" alt="Mode Soirée" class="nav-icon-svg">
+            </button>
+        </div>
+    </div>
+
+    <!-- ÉCRAN 7 : Paramètres -->
+    <div id="settingsScreen" class="screen">
+        <div class="feed-header">
+            <div class="header-left">
+                <img src="icons/prenium.svg" alt="Menu" class="icon-svg">
+            </div>
+            <div class="header-center">
+                <div class="logo-small">MALA</div>
+            </div>
+            <div class="header-right">
+                <img src="icons/Parametrev.svg" alt="Paramètres" class="icon-svg">
+            </div>
+        </div>
+
+        <div class="page-content">
+            <h1 class="page-title">Paramètres</h1>
+            
+            <div class="settings-list">
+                <div class="settings-item">
+                    <span>Règles du jeux</span>
+                    <img src="icons/Vector-2.svg" alt="Voir" class="arrow-icon">
+                </div>
+                <div class="settings-item">
+                    <span>Langue</span>
+                    <img src="icons/Vector-2.svg" alt="Voir" class="arrow-icon">
+                </div>
+                <div class="settings-item">
+                    <span>Notifications</span>
+                    <div class="toggle-switch active">
+                        <div class="toggle-slider"></div>
+                        <span class="toggle-text">ON</span>
+                    </div>
+                </div>
+                <div class="settings-item">
+                    <span>A propos</span>
+                    <img src="icons/Vector-2.svg" alt="Voir" class="arrow-icon">
+                </div>
+                <div class="settings-item">
+                    <span>Confidentialité et Accessibilité</span>
+                    <img src="icons/Vector-2.svg" alt="Voir" class="arrow-icon">
+                </div>
+                <div class="settings-item">
+                    <span>Aide</span>
+                    <img src="icons/Vector-2.svg" alt="Voir" class="arrow-icon">
+                </div>
+            </div>
+            
+            <img src="images/Frame_17.png" alt="Mascotte" class="mascotte-bottom">
+        </div>
+
+        <div class="bottom-nav">
+            <button class="nav-btn" onclick="showFeed()">
+                <img src="icons/home.svg" alt="Accueil" class="nav-icon-svg">
+            </button>
+            <button class="nav-btn" onclick="showLeaderboard()">
+                <img src="icons/coupeblack.svg" alt="Classement" class="nav-icon-svg">
+            </button>
+            <button class="nav-btn" onclick="showGames()">
+                <img src="icons/jeuxb.svg" alt="Jeux" class="nav-icon-svg nav-center">
+            </button>
+            <button class="nav-btn" onclick="showProfile()">
+                <img src="icons/Groupe.svg" alt="Profil" class="nav-icon-svg">
+            </button>
+            <button class="nav-btn" onclick="showSoiree()">
+                <img src="icons/fêteb.svg" alt="Mode Soirée" class="nav-icon-svg">
+            </button>
+        </div>
+    </div>
+
+    <!-- ÉCRAN 8 : Mode Soirée -->
+    <div id="soireeScreen" class="screen">
+        <div class="feed-header">
+            <div class="header-left">
+                <img src="icons/prenium.svg" alt="Menu" class="icon-svg">
+            </div>
+            <div class="header-center">
+                <div class="logo-small">MALA</div>
+            </div>
+            <div class="header-right">
+                <button onclick="showFeed()" class="btn-close">✕</button>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <h1 class="page-title">Mode soirée</h1>
+            
+            <div class="soiree-info">
+                <p>Bienvenue sur le mode soirée, ici vous pouvez pimenté votre soirée en réalisant plusieurs défis, des actions ou vérités, ou encore des jeux d'alcool.🥳</p>
+                <p>Pas d'inquiétude toute cette conversation sera supprimer au bout de 24H.</p>
+                <p>Alors lâchez-vous ce soir pas de limites ❌</p>
+            </div>
+            
+            <img src="images/Frame_17.png" alt="Mascotte" class="mascotte-bottom">
+        </div>
+
+        <!-- Input message -->
+        <div class="message-input">
+            <img src="icons/addj.svg" alt="Joindre" class="icon-msg">
+            <input type="text" placeholder="Votre message..." class="message-field">
+            <img src="icons/vocaux.svg" alt="Envoyer" class="icon-msg">
+        </div>
+
+        <div class="bottom-nav">
+            <button class="nav-btn" onclick="showFeed()">
+                <img src="icons/home.svg" alt="Accueil" class="nav-icon-svg">
+            </button>
+            <button class="nav-btn" onclick="showLeaderboard()">
+                <img src="icons/coupeblack.svg" alt="Classement" class="nav-icon-svg">
+            </button>
+            <button class="nav-btn" onclick="showGames()">
+                <img src="icons/jeuxb.svg" alt="Jeux" class="nav-icon-svg nav-center">
+            </button>
+            <button class="nav-btn" onclick="showProfile()">
+                <img src="icons/Groupe.svg" alt="Profil" class="nav-icon-svg">
+            </button>
+            <button class="nav-btn" onclick="showSoiree()">
+                <img src="icons/fêtev.svg" alt="Mode Soirée" class="nav-icon-svg">
+            </button>
+        </div>
+    </div>
+
+    <!-- ÉCRAN 9 : Profil/Aperçu Groupe -->
+    <div id="profileScreen" class="screen">
+        <div class="feed-header">
+            <div class="header-left">
+                <button onclick="showFeed()" class="btn-back-small">
+                    <span class="arrow-left"></span> Retour
+                </button>
+            </div>
+            <div class="header-right">
+                <button onclick="leaveGroup()" class="btn-quit">Quitter</button>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <h1 class="page-title">Membres du groupe</h1>
+            
+            <div id="membersList" class="members-grid"></div>
+        </div>
+
+        <div class="bottom-nav">
+            <button class="nav-btn" onclick="showFeed()">
+                <img src="icons/home.svg" alt="Accueil" class="nav-icon-svg">
+            </button>
+            <button class="nav-btn" onclick="showLeaderboard()">
+                <img src="icons/coupeblack.svg" alt="Classement" class="nav-icon-svg">
+            </button>
+            <button class="nav-btn" onclick="showGames()">
+                <img src="icons/jeuxb.svg" alt="Jeux" class="nav-icon-svg nav-center">
+            </button>
+            <button class="nav-btn active" onclick="showProfile()">
+                <img src="icons/Groupev.svg" alt="Profil" class="nav-icon-svg">
+            </button>
+            <button class="nav-btn" onclick="showSoiree()">
+                <img src="icons/fêteb.svg" alt="Mode Soirée" class="nav-icon-svg">
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="modalTitle"></h3>
+            <p id="modalMessage"></p>
+            <button onclick="closeModal()" class="btn-modal">OK</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
