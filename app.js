@@ -340,3 +340,28 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('joinCodeInput')?.addEventListener('input', (e) => {
     e.target.value = e.target.value.replace(/[^0-9]/g, '');
 });
+
+// ==========================================
+// En cours de dév
+// ==========================================
+
+function showPrenium() {
+    showModal('Prenium', 'Fonctionnalité en cours de développement...');
+}
+
+// Sélectionner le toggle switch
+const toggleSwitch = document.querySelector('.toggle-switch');
+const toggleText = document.querySelector('.toggle-text');
+
+// Ajouter l'événement de clic
+toggleSwitch.addEventListener('click', function() {
+    // Basculer la classe 'active'
+    this.classList.toggle('active');
+    
+    // Mettre à jour le texte
+    if (this.classList.contains('active')) {
+        toggleText.textContent = 'ON';
+    } else {
+        toggleText.textContent = 'OFF';
+    }
+});

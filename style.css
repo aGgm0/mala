@@ -145,7 +145,7 @@ body {
 
 .input-transparent::placeholder {
     color: white;  
-    opacity: 0.8;
+    opacity: 0.65;
 }
 
 .input-transparent:focus {
@@ -558,7 +558,7 @@ body {
 
 .leaderboard-item:nth-child(1) {
     background: linear-gradient(90deg, rgba(255,215,0,0.3) 0%, rgba(255,215,0,0.1) 100%);
-    transform: scale(1.05);
+
 }
 
 .leaderboard-item:nth-child(2) {
@@ -659,8 +659,9 @@ body {
     background: var(--purple-primary);
     border-radius: 50%;
     position: absolute;
-    left: 3px;
-    top: 3px;
+    left: 2px;
+    right: 4px;
+    top: 2px;
     transition: left 0.3s;
 }
 
@@ -670,7 +671,7 @@ body {
 
 .toggle-text {
     position: absolute;
-    right: 5px;
+    right: 3px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 6px;
@@ -754,9 +755,9 @@ body {
     background: transparent;
     border: 1px solid var(--white);
     border-radius: 23px;
-    padding: 5px 10px;
+    padding: 6px 12px;
     font-family: 'Super Dream', sans-serif;
-    font-size: 12px;
+    font-size: 16px;
     color: var(--white);
     cursor: pointer;
 }
@@ -765,9 +766,9 @@ body {
     background: transparent;
     border: 1px solid var(--white);
     border-radius: 23px;
-    padding: 5px 10px;
+    padding: 6px 12px;
     font-family: 'Super Dream', sans-serif;
-    font-size: 12px;
+    font-size: 16px;
     color: var(--white);
     cursor: pointer;
 }

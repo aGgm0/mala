@@ -46,7 +46,7 @@
             
             <div class="card-purple">
                 <h2 class="card-title">Nom du groupe</h2>
-                <input type="text" id="groupNameInput" class="input-transparent" placeholder="Partiels" maxlength="20">
+                <input type="text" id="groupNameInput" class="input-transparent" placeholder="Nom du groupe" maxlength="20">
                 
                 <h2 class="card-title">Difficulté</h2>
                 <select id="difficultySelect" class="input-transparent">
@@ -98,7 +98,7 @@
         <!-- Header -->
         <div class="feed-header">
             <div class="header-left">
-                <img src="icons/prenium.svg" alt="Menu" class="icon-svg">
+                <img src="icons/prenium.svg" alt="Menu" class="icon-svg" onclick="showPrenium()">
                 <div class="logo-small">MALA</div>
             </div>
             <div class="header-center">
@@ -248,11 +248,11 @@
             <div class="settings-list">
                 <div class="settings-item">
                     <span>Règles du jeux</span>
-                    <img src="icons/Vector-2.svg" alt="Voir" class="arrow-icon">
+                    <img src="icons/fleche.svg" alt="Voir" class="arrow-icon">
                 </div>
                 <div class="settings-item">
                     <span>Langue</span>
-                    <img src="icons/Vector-2.svg" alt="Voir" class="arrow-icon">
+                    <img src="icons/fleche.svg" alt="Voir" class="arrow-icon">
                 </div>
                 <div class="settings-item">
                     <span>Notifications</span>
@@ -263,15 +263,15 @@
                 </div>
                 <div class="settings-item">
                     <span>A propos</span>
-                    <img src="icons/Vector-2.svg" alt="Voir" class="arrow-icon">
+                    <img src="icons/fleche.svg" alt="Voir" class="arrow-icon">
                 </div>
                 <div class="settings-item">
                     <span>Confidentialité et Accessibilité</span>
-                    <img src="icons/Vector-2.svg" alt="Voir" class="arrow-icon">
+                    <img src="icons/fleche.svg" alt="Voir" class="arrow-icon">
                 </div>
                 <div class="settings-item">
                     <span>Aide</span>
-                    <img src="icons/Vector-2.svg" alt="Voir" class="arrow-icon">
+                    <img src="icons/fleche.svg" alt="Voir" class="arrow-icon">
                 </div>
             </div>
             
@@ -358,7 +358,7 @@
                 </button>
             </div>
             <div class="header-right">
-                <button onclick="leaveGroup()" class="btn-quit">Quitter</button>
+                <button onclick="leaveGroup()" class="btn-quit">Quitter le groupe</button>
             </div>
         </div>
 
