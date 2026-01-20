@@ -1,7 +1,7 @@
 Mala 🌟 - Prototype PWA
 Contexte :
 
-Ce projet a été développé dans le cadre d'un partiel en Bachelor 1 Web & Digital à MyDigitalSchool. Il s'agit d'un prototype d'application web progressive (PWA) visant à explorer les fonctionnalités clés des PWA, notamment le cache hors-ligne et les Service Workers.
+Ce projet a été développé dans le cadre d'un partiel en Bachelor 1 Web & Digital à MyDigitalSchool. Il s'agit d'un prototype d'application web progressive (PWA) visant à explorer les fonctionnalités clés des PWA.
 Fonctionnalités :
 
 Interface utilisateur responsive
